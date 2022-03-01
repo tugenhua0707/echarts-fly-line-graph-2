@@ -1465,7 +1465,7 @@ const MyChart = (props) => {
 第二个地图的上层地图设置边框，即 series中的 itemStyle.normal属性。
 
 如上配置部分代码实现边框：
-
+```
 geo: [
   {
     map: 'china', // 地图名
@@ -1523,11 +1523,11 @@ geo: [
     }
   }
 ]
-
+```
 如上代码，geo 设置了 true，允许缩放，但是两个地图如何实现拖拽缩放同步呢？
 
 解决的办法：添加如下js监听代码，捕捉 georoam事件，使下层 geo 跟着上层 geo 一起拖拽缩放。如下监听代码：
-
+```
 // 捕捉到georoam事件，使下层的geo随着上层的geo一起缩放拖拽
 china.off('georoam').on('georoam', function(params) {
   var option = china.getOption(); 
@@ -1543,5 +1543,5 @@ china.off('georoam').on('georoam', function(params) {
   }
   china.setOption(option, true);
 });
-
+```
 如上代码只是对 缩放有效，对拖动的时候，底层地图和上层地图还是不能同步到，需要把 animation: false, 设置false 解决阻止拖拽时上下图层不同步的问题。
